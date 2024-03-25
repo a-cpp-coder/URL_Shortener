@@ -19,7 +19,14 @@ class ShortCode
     result
   end
 
-  def self.decode(number)
+  def self.decode(string)
+    number = 0
+
+    string.each_char.with_index do |char, index|
+      number = ALPHABET.index(char)  + number * BASE
+    end
+
+    number
   end
 end
 
