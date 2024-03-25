@@ -1,4 +1,5 @@
 class Link < ApplicationRecord
+  has_many :views, dependent: :destroy
   scope :recent_first, -> { order(created_at: :desc) }
   # can reuse this, make as a common thing
 
