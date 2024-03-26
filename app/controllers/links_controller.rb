@@ -11,7 +11,13 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     if @link.save
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.prepend("links", @link),
+          turbo_stream.replace("link_form", partial: "links/form", locals: { link: Link.new })]
+        } # background job done
+      end
     else
       index # to make sure not render the nil
       render :index, status: :unprocessable_entity
