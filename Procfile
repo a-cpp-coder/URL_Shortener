@@ -1,1 +1,1 @@
-web: bundle exec foreman start -f Procfile.dev "$@"
+web: bundle exec bin/dev
